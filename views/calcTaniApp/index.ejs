@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <title>授業単位確認ページ</title>
+  <link rel="stylesheet" href="../stylesheets/style.css">
+  <script src="../javascripts/script.js"></script>
+</head>
+
+<body>
+  <div id="top" class="">
+  </div>
+  <header id="header">
+    <h1 id="headerMainTitle">文化政策学科　単位確認・判定フォーム</h1>
+  </header>
+
+  <div id="applicationBody">
+
+    <nav id="mainNavigation">
+      <ul>
+        <li>
+          <a id="anchorLinkedIndexOfKamoku" href="#indexOfKamoku">科目一覧</a>
+        </li>
+        <li>
+          <a id="anchorLinkedResultArea" href="#resultArea">判定結果</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- <div id="kamokuArea" class="sideColumn positionLeft containerForPopUp"> -->
+    <div id="kamokuArea" class="sideColumn positionLeft">
+      <nav id="indexOfKamoku" class="">
+
+        <!-- 科目表の目次の中身を書き出す -->
+        <%- 
+      include("kamokuIndexTemplate",
+              {
+                kamokuTree: kamokuTree,
+              }
+      ); 
+%>
+        <!-- 科目全体リスト閉じ -->
+      </nav>
+      <!-- ナビid="indexOfKamoku"閉じ -->
+    </div>
+    <!-- wrapSideColumn閉じ -->
+
+    <div id="wrapMainColumn">
+      <div class="" id="inputAreaForCheckingForeigner">
+        <p>
+          <apan class="caution">あなたは留学生ですか<br>
+            Are you a foreigner student?<br></apan>
+
+          <label for="ForeignStudent">
+            <input type="radio" class="radio" name="isTheStudentForeigner" value="はい" id="ForeignStudent">はい yes
+          </label>
+          <label for="NotForeignStudent">
+            <input type="radio" class="radio" name="isTheStudentForeigner" value="いいえ" id="NotForeignStudent"
+              checked>いいえ no
+          </label>
+        </p>
+      </div>
+      <h1 id="mainFormTitle">文化政策学科 科目表</h1>
+      <p id="必修科目"><span class="caution">赤文字の授業は必修科目です。</span></p>
+      <form action="">
+        <div id="科目表" data-necessary="">
+
+
+          <!-- 科目表の中身を書き出す。 -->
+          <%- include( "./kamokuForm/kamokuSectionsTemplate", 
+          { kamokuSections  : kamokuSections, 
+            courses         : courses,
+            kamokuTree      : kamokuTree,
+            additionalTanis : additionalTanis,
+          });
+          %>
+        </div>
+
+        <div id="executeButtonArea" class="buttonArea">
+
+          <p>
+            <a href="#resultArea">
+              <input id="buttonGetResults" type="button" class="button" value="単位確認">
+            </a>
+          </p>
+
+        </div>
+        <!-- 単位確認ボタンエリア閉じ -->
+
+      </form>
+      <!-- 科目フォーム閉じ -->
+
+    </div>
+    <!-- id="wrapMainColumn"閉じ -->
+
+    <!-- <div id="resultArea" class="sideColumn positionRight containerForPopUp"> -->
+    <div id="resultArea" class="sideColumn positionRight">
+      <div id="contentsContainerInResultArea">
+        <p class="caution">
+          結果（単位が不足している区分は、背景が黄色くなります。）
+        </p>
+        <!-- 表示された結果を画面から消すボタン -->
+        <div class="buttonArea">
+          <input id="buttonResetResults" type="button" class="button" name="" value="判定結果を消す">
+        </div>
+        <!-- 結果が表示されるリスト -->
+        <ol id="result"> </ol>
+      </div>
+
+    </div>
+
+
+  </div>
+  <!-- applicationBodyとじ -->
+
+  <footer id="footer">
+    <a href="#top">
+      ページトップへ
+    </a>
+
+  </footer>
+
+
+
+</body>
+
+</html>

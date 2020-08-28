@@ -1,0 +1,18 @@
+<div id="<%= section.name %>" class="kubun oowaku" data-necessary="<%= section.necessary %>"
+    data-belong="<%= section.belong %>">
+
+    <p class="
+    <% if(section.type === 1 ){%>
+        middleHeading
+        <%}%>
+        <%if(section.type === 2){%>
+            kubunHeading
+            <%}%>
+        ">
+        <%= section.name %>    
+    </p>
+    <div>
+        <!-- セクション内の授業を出力する -->
+        <%- include("./coursesTemplate", {courses: courses, section: section}) %>
+    </div>
+    

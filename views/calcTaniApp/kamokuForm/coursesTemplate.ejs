@@ -1,0 +1,34 @@
+<!-- sectionに属するcourse（授業）を1年から前期・後期ごとに出力していく -->
+<% for(let year of [1,2,3,4]){ %>
+<% for(let semester of ["前期", "後期"]){ %>
+<% let coursesInThisSemester = [];
+    //例えば1年前期の授業の中で今の科目セクションに該当する科目だけを配列aoursesInThisSemesterに入れていく
+    for(let course of courses){  
+        if(section.name === course.belong 
+        && year == course.year 
+        && semester === course.semester){  
+            coursesInThisSemester.push(course)
+        } 
+    } %>
+
+<% if ( coursesInThisSemester.length > 0) { %>
+<div class="semester cf">
+    <p><%= year %>年：<%= semester %></p>
+
+    <div class="checkbox">
+        <% for ( let course of coursesInThisSemester){ %>
+        <label for="<%= course.name %>" class="inlineBlock <% if(course.must){%>caution<%}%>">
+                <input type="checkbox" class="kamoku <% if(course.must){%>must<%}%>" name="<%= course.name %>"
+            id="<%= course.name %>" data-blong="<%= course.belong%>" value="<%= course.tani %>">
+            <%= course.name %>
+        </label>
+        <% }//for ( let course of coursesInThisSemester)閉じ %>
+
+    </div>
+
+
+
+</div>
+<% }//if ( coursesInThisSemester.length > 0)閉じ %>
+<% }//for(let semester of ["前期", "後期"])閉じ %>
+<% }//for(let year of [1,2,3,4])閉じ %>

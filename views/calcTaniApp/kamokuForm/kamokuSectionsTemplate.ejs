@@ -1,0 +1,51 @@
+<%
+function writeKamokuSections(kamokuTree, kamokuSections) {
+　//kamokuTreeは科目表の段組みを再現しているkeyをトラバースしていくことで科目の順番が分かる
+  for (let key of Object.keys(kamokuTree)) {
+    //kamokuSectionsはデータベースから取ってきた科目の詳細が配列になっている
+    for (let kamokuSection of kamokuSections) {
+      //科目の名前がkamokuTreeのキーに一致する場合その科目を描画する
+      if (kamokuSection.name === key) {
+%>
+<!-- セクションの具体的な中身を出力する -->
+<%- include("./kamokuContentsTemplate", {section : kamokuSection}) %>
+
+<!-- セクション内の追加単位科目を出力する -->
+<%- include("./additionalTani.ejs", 
+                {parent         : kamokuSection.name, 
+                additionalTanis : additionalTanis}
+            ) 
+%>
+
+<%         
+      }//閉じif (kamokuSection.name === key)
+    
+    }//閉じfor (kamokuSection of kamokuSections)
+    
+    //もし今のセクションの下にさらにセクションがあれば再起関数によってセクションがなくなるまで繰り返す。
+    if (Object.keys(kamokuTree[key]).length > 0) {
+      writeKamokuSections(Object.assign({},kamokuTree[key]), kamokuSections);
+      %>
+
+
+<!-- 再起関数から戻ってきた後 -->
+<!-- セクション閉じ -->
+</div>
+<!-- div class=" kubun"閉じ -->
+
+<%}else{ //セクション内のにさらにセクションが無かった時 %>
+<!-- セクション閉じ -->
+</div>
+<!-- div class=" kubun"閉じ -->
+<% }//閉じfor (let kamokuSection of kamokuSections)else %>
+<!-- if elseの分岐が統一された後の処理 -->
+
+<%  }//閉じfor (let key of Object.keys(kamokuTree))
+
+}//閉じfunction writeKamokuSections(kamokuTree, kamokuSections)
+%>
+
+<%
+//科目のセクションを書き出す
+writeKamokuSections(kamokuTree, kamokuSections)
+%>

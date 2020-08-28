@@ -1,0 +1,43 @@
+<%
+//kamokuTreeはテンプレートの呼び出し時にわたってくる。
+//kamokuTreeをトラバースする。
+//keyが科目セクションの名前になっている。科目表の順番にとりだせる
+function writeKamokuSections(kamokuTree) {
+%>
+
+<Ul>
+
+  <%
+  for (let key of Object.keys(kamokuTree)) {   
+%>
+  <li><a href="#<%= key %>"><%= key %></a></li>
+
+  <%         
+  
+  
+  //もし今のセクションの下にさらにセクションがあれば再起関数によってセクションがなくなるまで繰り返す。
+  if (Object.keys(kamokuTree[key]).length > 0) {
+    writeKamokuSections(Object.assign({},kamokuTree[key]));
+    
+    %>
+
+
+</Ul>
+
+
+<%}else{ //セクション内のにさらにセクションが無かった時 %>
+
+<% }//閉じfor (let kamokuSection of kamokuSections)else %>
+
+<%  }//閉じfor (let key of Object.keys(kamokuTree))%>
+
+
+<%
+}//閉じfunction writeKamokuSections(kamokuTree)
+%>
+
+
+<%
+  //科目のセクションを書き出す
+  writeKamokuSections(kamokuTree)
+%>

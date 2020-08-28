@@ -1,0 +1,28 @@
+<% const additionalTanisInThisSection = [] 
+        //additionalTanisはデータベースから取ってきた配列
+        for(let additionalTani of additionalTanis){
+            //parentはこの科目セクションの名前
+            //今の科目セクションに属する追加単位科目だけを配列に入れていく
+            if(parent === additionalTani.belong){
+                additionalTanisInThisSection.push(additionalTani)
+            }//閉じif(parent === additionalTani.belong)
+
+        }//閉じfor(let additionalTani of additionalTanis)
+        
+    %>
+<ol>
+
+    <% for( let additionalTani of additionalTanisInThisSection){ %>
+    <li id="<%= additionalTani.name %>" class="inputArea">
+        <p>
+            <%= additionalTani.name %>
+            (<%= additionalTani.belong %>卒業用県単位に
+            <%= additionalTani.max %>単位を上限に算入)
+            <br>
+            半角数字で単位数を入力してください。
+            <br>
+            <input type="number" class="input tagakka additionalTani" name="tagakkaTani" value="0" min="0"
+                max="<%= additionalTani.max %>" data-belong="<%= additionalTani.belong %>" </p>
+    </li>
+    <% }//閉じfor( let additionalTani of additionalTanisInThisSection) %>
+</ol>
