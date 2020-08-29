@@ -10,10 +10,10 @@
         }//閉じfor(let additionalTani of additionalTanis)
         
     %>
-<ol>
+<div>
 
     <% for( let additionalTani of additionalTanisInThisSection){ %>
-    <li id="<%= additionalTani.name %>" class="inputArea">
+    <div id="<%= additionalTani.name %>" class="inputArea">
         <p>
             <%= additionalTani.name %>
             (<%= additionalTani.belong %>卒業用県単位に
@@ -23,6 +23,6 @@
             <br>
             <input type="number" class="input tagakka additionalTani" name="tagakkaTani" value="0" min="0"
                 max="<%= additionalTani.max %>" data-belong="<%= additionalTani.belong %>" </p>
-    </li>
+    </div>
     <% }//閉じfor( let additionalTani of additionalTanisInThisSection) %>
-</ol>
+</div>

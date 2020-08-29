@@ -1,3 +1,4 @@
+<!-- 科目セクションを描画する -->
 <div id="<%= section.name %>" class="kubun oowaku" data-necessary="<%= section.necessary %>"
     data-belong="<%= section.belong %>">
 
@@ -15,4 +16,10 @@
         <!-- セクション内の授業を出力する -->
         <%- include("./coursesTemplate", {courses: courses, section: section}) %>
     </div>
-    
+    <!-- セクション内の追加単位科目を出力する -->
+        <%- include("./additionalTani.ejs", 
+        {parent         : section.name, 
+        additionalTanis : additionalTanis}
+        ) 
+        %>
+</div>

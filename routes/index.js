@@ -1,5 +1,9 @@
 var express = require('express');
 var router = express.Router();
+/* GET home page. */
+router.get('/', function (req, res, next) {
+  res.render('index', { title: '卒業単位計算アプリ：HOME' });
+});
 
 // 仮想のデータベース
 // 授業詳細のデータ
